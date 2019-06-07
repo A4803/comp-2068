@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 
-// Importing the pageRoutes
+// Importing the Routes
 const pageRoutes = require('./routes/pages');
 const blogRoutes = require('./routes/blogs');
 
