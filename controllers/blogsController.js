@@ -70,3 +70,42 @@ Blog.find().published()
       console.log(`ERROR: ${err}`);
     });
 };
+
+exports.edit = (req, res) => {
+  Blog.findById(req.params.id)
+    .then(blog => {
+      res.render('blogs/edit', {
+        title: `Edit ${blog.title}`,
+        blog: blog
+      })
+    })
+    .catch(err => {
+      console.log(`ERROR: ${err}`);
+    });
+};
+
+exports.update = (req, res) => {
+  Blog.updateOne({
+      _id: req.body.id
+    }, req.body.blog, {
+      runValidators: true
+    })
+    .then(() => {
+      res.redirect('/blogs');
+    })
+    .catch(err => {
+      console.log(`ERROR: ${err}`);
+    });
+};
+
+exports.destroy = (req, res) => {
+  Blog.deleteOne({
+      _id: req.body.id
+    })
+    .then(() => {
+      res.redirect('/blogs');
+    })
+    .catch(err => {
+      console.log(`ERROR: ${err}`);
+    });
+};
